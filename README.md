@@ -15,7 +15,7 @@ Because the tracker loads a JSON file, you should serve it from a local web serv
 Option 1: VS Code Live Server
 1. Open the workspace in VS Code
 2. Install the Live Server extension if needed
-3. Right-click `data/index.html` and choose "Open with Live Server"
+3. Right-click `index.html` and choose "Open with Live Server"
 
 Option 2: Python
 ```
@@ -23,7 +23,7 @@ python -m http.server 5500
 ```
 Then open:
 ```
-http://localhost:5500/data/index.html
+http://localhost:5500/index.html
 ```
 
 ## Data file

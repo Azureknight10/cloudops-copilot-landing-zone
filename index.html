@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cloud Infrastructure – Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg: #0f172a;
+      --bg-2: #0b1224;
+      --ink: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #2dd4bf;
+      --accent-2: #38bdf8;
+      --card: rgba(15, 23, 42, 0.7);
+      --stroke: rgba(148, 163, 184, 0.2);
+      --glow: rgba(45, 212, 191, 0.35);
+      --shadow: 0 20px 60px rgba(2, 6, 23, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(56, 189, 248, 0.18), transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, rgba(45, 212, 191, 0.16), transparent 60%),
+        linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 100%);
+      padding: 48px 24px 64px;
+      overflow-x: hidden;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(15, 23, 42, 0.6);
+      font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.3);
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(2.4rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 40ch;
+    }
+
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+    }
+
+    .btn.primary {
+      color: #0b1224;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      box-shadow: 0 12px 30px var(--glow);
+    }
+
+    .btn.ghost {
+      color: var(--ink);
+      border-color: var(--stroke);
+      background: rgba(15, 23, 42, 0.45);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      animation: floatIn 0.8s ease both;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .list-item {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      transition: border 0.2s ease, transform 0.2s ease;
+    }
+
+    .list-item:hover {
+      transform: translateX(4px);
+      border-color: rgba(45, 212, 191, 0.5);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 12px rgba(45, 212, 191, 0.6);
+      flex-shrink: 0;
+    }
+
+    .list-item a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .meta {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="grid">
+      <section>
+        <span class="tag">CloudOps Workspace</span>
+        <h1>Cloud Infrastructure Projects</h1>
+        <p class="subtitle">
+          A curated hub for CloudOps initiatives, status tracking, and deployment
+          milestones. Jump into the tracker to monitor progress in real time.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="tracker.html">Open Progress Tracker</a>
+          <a class="btn ghost" href="data/cloudops_landing_zone_tracker.json">View Roadmap Data</a>
+        </div>
+        <p class="meta">Last updated: February 11, 2026</p>
+      </section>
+
+      <aside class="card">
+        <h2>Active Projects</h2>
+        <p class="subtitle">Select a project to explore details and milestones.</p>
+        <div class="list">
+          <div class="list-item">
+            <span class="dot"></span>
+            <a href="tracker.html">CloudOps Copilot Landing Zone – Progress Tracker</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
