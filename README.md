@@ -47,3 +47,27 @@ Progress is saved to `localStorage` in your browser. Clearing site data resets p
 - [x] `terraform plan` shows no drift (infra matches code).
 
 ![Hub-and-spoke network diagram](docs/hub_spoke_network.png)
+
+## Landing Zone Security Baseline: UAMI + Key Vault
+
+As part of the hub-and-spoke landing zone, I implemented a security baseline for application secrets using Azure Key Vault and a user-assigned managed identity (UAMI).
+
+## What this does
+
+- Centralizes application secrets (connection strings, API keys, etc.) in a locked-down Azure Key Vault (`cloudops-hubspoke-kv`) instead of in code or app settings.
+- Uses a user-assigned managed identity (`cloudops-hubspoke-uami-app`) so apps can authenticate to Key Vault without storing credentials.
+- Enforces least privilege by giving that identity only Get and List permissions on secrets via a Key Vault access policy.
+- Protects the vault with soft delete and purge protection, and disables public network access so it is only reachable through authorized Azure paths.
+
+## How it works (high level)
+
+- An app in a spoke (App Service, Function, or VM) is assigned the UAMI `cloudops-hubspoke-uami-app` and runs without embedded secrets.
+- At runtime, the app requests a token from Azure Entra ID using its managed identity, scoped for Key Vault.
+- The app calls `cloudops-hubspoke-kv` with that token and can only read secrets (Get/List) permitted by the access policy.
+- Management group/policy baselines can further enforce that all Key Vaults in this landing zone have soft delete, purge protection, and restricted network access enabled by default.
+
+You can see the overall architecture in `cloudops-hubspoke-network-architecture.png`, and the secrets flow in `cloudops-hubspoke-uami-keyvault.png`.
+
+![Hub-spoke overall architecture](docs/cloudops-hubspoke-network-architecture.png)
+
+![UAMI to Key Vault secrets flow](docs/cloudops-hubspoke-uami-keyvault.png)
