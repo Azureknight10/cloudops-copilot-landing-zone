@@ -35,3 +35,15 @@ The tracker reads its roadmap from:
 ## Notes
 
 Progress is saved to `localStorage` in your browser. Clearing site data resets progress.
+
+## Milestone 1 - Hub-and-Spoke Network (Completed)
+
+- [x] Terraform scaffolding (`infra/terraform/network`) for AzureRM provider and common tags.
+- [x] Deployed `rg-cloudops-hubspoke` (eastus) with:
+	- Hub VNet `vnet-hub-dev (10.0.0.0/16)` + `subnet-hub-default (10.0.1.0/24)` and `nsg-hub-default`.
+	- Spoke VNet `vnet-spoke-app-dev (10.1.0.0/16)` + `subnet-spoke-app (10.1.1.0/24)` and `nsg-spoke-app`.
+	- Bi-directional VNet peering between hub and spoke.
+- [x] Tags applied on core resources: `project=cloudops-copilot-landing-zone`, `env=dev`, `owner=shane`.
+- [x] `terraform plan` shows no drift (infra matches code).
+
+![Hub-and-spoke network diagram](docs/hub_spoke_network.png)
