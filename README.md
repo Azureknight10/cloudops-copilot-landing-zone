@@ -52,6 +52,13 @@ Progress is saved to `localStorage` in your browser. Clearing site data resets p
 
 As part of the hub-and-spoke landing zone, I implemented a security baseline for application secrets using Azure Key Vault and a user-assigned managed identity (UAMI).
 
+### IaC Implementation Notes
+
+- Terraform module creates `cloudops-hubspoke-uami-app` and `cloudops-hubspoke-kv`.
+- UAMI has only Get/List permissions on secrets via a Key Vault access policy.
+- Key Vault enforces soft delete, purge protection, and public network access disabled.
+- Root module exposes outputs (identity IDs, Key Vault name) for spoke/app modules to consume.
+
 ## What this does
 
 - Centralizes application secrets (connection strings, API keys, etc.) in a locked-down Azure Key Vault (`cloudops-hubspoke-kv`) instead of in code or app settings.
