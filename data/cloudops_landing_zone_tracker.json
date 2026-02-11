@@ -1,0 +1,256 @@
+{
+  "estimated_hours": 50,
+  "difficulty": 7,
+  "roadmap": [
+    {
+      "weekend": "1",
+      "title": "Hub-and-Spoke Landing Zone via IaC",
+      "dates": "Weekend 1",
+      "hours": "6-8",
+      "tasks": [
+        "Author hub + spoke VNets, subnets, NSGs, and peering in Terraform/Bicep",
+        "Add basic tags (env, owner, app) on all resources from day one",
+        "Run plan/apply cycles and validate basic connectivity"
+      ],
+      "deliverables": [
+        "Working hub + spoke VNets with peering",
+        "IaC module for network baseline",
+        "Connectivity smoke test notes in /docs"
+      ],
+      "skills": [
+        "Azure Networking",
+        "Terraform/Bicep",
+        "Resource Tagging"
+      ]
+    },
+    {
+      "weekend": "2",
+      "title": "Security Baseline (Key Vault, RBAC, Policy)",
+      "dates": "Weekend 2",
+      "hours": "5-7",
+      "tasks": [
+        "Deploy Key Vault and wire managed identities/service principals",
+        "Configure least-privilege RBAC for infra and app identities",
+        "Add Azure Policies (allowed locations, required tags, HTTPS only, no public IP on certain resources)"
+      ],
+      "deliverables": [
+        "Key Vault integrated with app/Functions",
+        "Policy definitions/assignments in IaC",
+        "Security baseline documented in /docs"
+      ],
+      "skills": [
+        "Azure Key Vault",
+        "RBAC",
+        "Azure Policy"
+      ]
+    },
+    {
+      "weekend": "3",
+      "title": "Monitoring and Observability Baseline",
+      "dates": "Weekend 3",
+      "hours": "3-5",
+      "tasks": [
+        "Create Log Analytics workspace and link hub + spokes",
+        "Enable diagnostics for VNets/NSGs, Key Vault, App Service/VM",
+        "Create alerts for availability, CPU, and error rate"
+      ],
+      "deliverables": [
+        "Central Log Analytics workspace",
+        "Diagnostic settings IaC module",
+        "Basic alert rules in place"
+      ],
+      "skills": [
+        "Azure Monitor",
+        "Log Analytics",
+        "Alerting"
+      ]
+    },
+    {
+      "weekend": "4",
+      "title": "Compute + Storage/DB in a Spoke",
+      "dates": "Weekend 4",
+      "hours": "5-7",
+      "tasks": [
+        "Deploy App Service or VM via IaC into a spoke",
+        "Deploy Storage account + table/blob or small DB",
+        "Deploy a 'hello API/app' that uses storage/DB"
+      ],
+      "deliverables": [
+        "Running demo app in a spoke",
+        "IaC for compute + storage/DB",
+        "App configuration and connection strings documented"
+      ],
+      "skills": [
+        "App Service/VM",
+        "Storage/DB",
+        "App Deployment"
+      ]
+    },
+    {
+      "weekend": "5",
+      "title": "Platform Golden Path Template (Future-Leaning)",
+      "dates": "Weekend 5",
+      "hours": "4-6",
+      "tasks": [
+        "Create a template folder for a new spoke app (VNet bits, Key Vault, monitoring, app config)",
+        "Wire pipelines so using the template auto-builds infra + app",
+        "Document the Git-first onboarding workflow (copy template, change values, push)"
+      ],
+      "deliverables": [
+        "Golden path template for new spoke apps",
+        "Documented GitOps onboarding flow",
+        "Example PR/story for new app onboarding"
+      ],
+      "skills": [
+        "Platform Engineering",
+        "GitOps",
+        "Developer Experience"
+      ]
+    },
+    {
+      "weekend": "6",
+      "title": "CI/CD for IaC and App (GitOps Style)",
+      "dates": "Weekend 6",
+      "hours": "5-7",
+      "tasks": [
+        "Create IaC pipeline (lint/validate, plan, apply to dev)",
+        "Create app pipeline (build, test, deploy to spoke)",
+        "Add branching/approval rules and document PR → dev flow"
+      ],
+      "deliverables": [
+        "Working IaC pipeline",
+        "Working app pipeline",
+        "CI/CD flow diagram in /docs"
+      ],
+      "skills": [
+        "Azure DevOps/GitHub Actions",
+        "CI/CD",
+        "YAML Pipelines"
+      ]
+    },
+    {
+      "weekend": "7",
+      "title": "FinOps and Governance Basics (Future-Leaning)",
+      "dates": "Weekend 7",
+      "hours": "3-5",
+      "tasks": [
+        "Enforce cost/owner tags via Policy",
+        "Configure budgets/alerts per subscription or per app resource group",
+        "Document the cost management pattern in /docs"
+      ],
+      "deliverables": [
+        "Tag-based cost enforcement",
+        "Budgets/alerts configured",
+        "FinOps section in /docs"
+      ],
+      "skills": [
+        "FinOps",
+        "Cost Management",
+        "Governance"
+      ]
+    },
+    {
+      "weekend": "8",
+      "title": "Azure AI Foundry Copilot over /docs",
+      "dates": "Weekend 8",
+      "hours": "3-5",
+      "tasks": [
+        "Create Azure AI Foundry project/agent",
+        "Connect /docs as grounding source",
+        "Tune system prompt + test questions (onboarding, hub-spoke explanation)"
+      ],
+      "deliverables": [
+        "Working copilot answering infra questions",
+        "Prompt + example Q&A in /docs"
+      ],
+      "skills": [
+        "Azure AI Foundry",
+        "Prompt Engineering",
+        "RAG"
+      ]
+    },
+    {
+      "weekend": "9",
+      "title": "MCP Server + get_vnet_topology",
+      "dates": "Weekend 9",
+      "hours": "6-8",
+      "tasks": [
+        "Deploy Azure Functions MCP server",
+        "Implement get_vnet_topology using ARM/Resource Graph",
+        "Register MCP server as a tool with the Foundry agent and test end-to-end"
+      ],
+      "deliverables": [
+        "MCP Functions app deployed",
+        "get_vnet_topology tool returning JSON",
+        "Test transcript from copilot calling the tool"
+      ],
+      "skills": [
+        "Azure Functions",
+        "ARM/Resource Graph",
+        "MCP"
+      ]
+    },
+    {
+      "weekend": "10",
+      "title": "Extra MCP Tools for Platform Ops (Future-Leaning)",
+      "dates": "Weekend 10",
+      "hours": "4-6",
+      "tasks": [
+        "Implement get_spoke_overview (app, owner, cost tags, endpoints)",
+        "Implement list_noncompliant_resources (simple tag or policy check)",
+        "Document usage patterns in /docs and test from copilot"
+      ],
+      "deliverables": [
+        "Additional MCP tools deployed",
+        "Ops-focused tool examples",
+        "MCP usage section in /docs"
+      ],
+      "skills": [
+        "Platform Engineering",
+        "AIOps",
+        "Automation"
+      ]
+    },
+    {
+      "weekend": "11",
+      "title": "Hybrid/Sovereign-Aware Design Notes (Future-Leaning)",
+      "dates": "Weekend 11",
+      "hours": "2-4",
+      "tasks": [
+        "Design how standard vs restricted/sovereign workloads would map to subs/VNets/policies",
+        "Add diagrams or text explaining the pattern",
+        "Call out data residency/compliance considerations"
+      ],
+      "deliverables": [
+        "Hybrid/sovereign pattern section in /docs",
+        "Simple architecture diagram (optional)"
+      ],
+      "skills": [
+        "Hybrid Cloud",
+        "Compliance",
+        "Architecture"
+      ]
+    },
+    {
+      "weekend": "12",
+      "title": "Platform and Runbook Documentation",
+      "dates": "Weekend 12",
+      "hours": "2-4",
+      "tasks": [
+        "Write /docs overview, network/security design, CI/CD flow, AI/copilot behavior, MCP tools",
+        "Add 'Golden path: onboarding a new spoke app (GitOps)' runbook",
+        "Add 'Future roadmap: Landing Zone 2.0/3.0 ideas' section"
+      ],
+      "deliverables": [
+        "Complete /docs folder",
+        "Two+ runbooks",
+        "Future roadmap documented"
+      ],
+      "skills": [
+        "Technical Writing",
+        "Architecture Explanation",
+        "Runbooks"
+      ]
+    }
+  ]
+}
