@@ -74,16 +74,26 @@ In Azure, the Web App resolves `TestSecret` from `cloudops-hubspoke-kv` via `Add
 
 ## Monitoring & Observability
 
-This landing zone includes a dedicated monitoring stack for the hub-and-spoke environment.
 
-- **Resource group:** `rg-cloudops-monitoring-dev`
-- **Log Analytics workspace:** `log-cloudops-platform-dev` (East US)
-- **Scope:** Central workspace for platform logs and metrics from Key Vault, App Services, VNets/NSGs, and other landing-zone resources.
-- **Status:** Workspace and dev monitoring RG are provisioned via Terraform (`monitoring/dev/main.tf`). Key Vault diagnostic settings are configured to send audit logs and metrics to this workspace.
+### App Service Monitoring Integration
 
-Over time this workspace will host:
-- Baseline alerts for availability, performance, and security across the landing zone.
-- Saved KQL queries and workbooks (see `monitoring/dev/queries` and `monitoring/dev/workbooks.md`) for day-to-day CloudOps troubleshooting and dashboards.
+The dev App Service (`dev-spoke-app`) is wired for centralized monitoring using Azure Log Analytics and Terraform.
+
+- **Diagnostic setting:** Configured on `dev-spoke-app` to send logs and metrics to Log Analytics ([docs](https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings)).
+- **Workspace:** All logs and metrics are sent to `log-cloudops-platform-dev`, enabling KQL queries, alerts, and dashboards ([docs](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/appservicehttplogs)).
+- **Log types:**
+	- `AppServiceHTTPLogs`: Access logs (requests, status codes, latency)
+	- `AppServiceConsoleLogs`: Stdout/stderr output (e.g., `console.log`, `ILogger`)
+	- `AppServiceAppLogs`: Application-level logs and exceptions
+- **Metrics:** All platform metrics (CPU, memory, requests, errors) are sent to Log Analytics ([docs](https://docs.azure.cn/en-us/app-service/tutorial-troubleshoot-monitor)).
+- **Terraform import:** Existing diagnostic setting imported into Terraform state for declarative management ([docs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting)).
+- **Retention:** Retention settings are honored as-is; future changes will use workspace/storage policies ([support](https://support.hashicorp.com/hc/en-us/articles/26764939614995-How-to-enable-Storage-Read-Write-or-Delete-Diagnostic-Settings-for-Azure-Blob-File-Queue-and-Table-using-Terraform)).
+
+#### Practical Benefits
+
+- **Centralized observability:** One workspace for HTTP logs, console/app logs, and metrics from `dev-spoke-app` ([docs](https://docs.azure.cn/en-us/azure-monitor/platform/tutorial-resource-logs)).
+- **IaC control:** Diagnostic wiring is Terraform-driven; new environments can be set up with `plan/apply` ([notes](https://notes.kodekloud.com/docs/AZ-204-Developing-Solutions-for-Microsoft-Azure/Configuring-Web-App-Settings/Configuring-Diagnostic-Logging)).
+- **Ready for KQL:** Query logs and metrics in Log Analytics for debugging and monitoring ([stackoverflow](https://stackoverflow.com/questions/67107019/azure-log-analytics-how-to-display-appserviceconsolelogs-and-appservicehttplogs)).
 
 ## Repo layout
 
