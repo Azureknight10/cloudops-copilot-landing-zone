@@ -78,3 +78,49 @@ You can see the overall architecture in `cloudops-hubspoke-network-architecture.
 ![Hub-spoke overall architecture](docs/cloudops-hubspoke-network-architecture.png)
 
 ![UAMI to Key Vault secrets flow](docs/cloudops-hubspoke-uami-keyvault.png)
+
+## DevSpokeApp
+
+Minimal .NET 8 web app used for testing configuration and Azure Key Vault integration.
+
+## Local development
+
+```bash
+cd "C:\dev\Cloud Infrastructure\src\DevSpokeApp"
+dotnet run
+```
+
+The app listens on the port from `Properties\launchSettings.json` (currently `http://localhost:5043`).
+
+## Endpoints
+
+- `/` - health check, returns `DevSpokeApp running`.
+- `/secret` - returns the value of `TestSecret` from configuration.
+
+## Configuring TestSecret locally
+
+Create `appsettings.json` in the project root:
+
+```json
+{
+	"Logging": {
+		"LogLevel": {
+			"Default": "Information",
+			"Microsoft.AspNetCore": "Warning"
+		}
+	},
+	"AllowedHosts": "*",
+	"TestSecret": "Hello from appsettings"
+}
+```
+
+Then restart the app:
+
+```bash
+dotnet run
+```
+
+Browse to:
+
+- `http://localhost:5043/` - `DevSpokeApp running`
+- `http://localhost:5043/secret` - `Hello from appsettings`
