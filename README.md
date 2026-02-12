@@ -72,6 +72,19 @@ Browse to `http://localhost:5043/` or `http://localhost:5043/secret`.
 
 In Azure, the Web App resolves `TestSecret` from `cloudops-hubspoke-kv` via `AddAzureKeyVault` + `DefaultAzureCredential` using a user-assigned managed identity (`AZURE_CLIENT_ID`).
 
+## Monitoring & Observability
+
+This landing zone includes a dedicated monitoring stack for the hub-and-spoke environment.
+
+- **Resource group:** `rg-cloudops-monitoring-dev`
+- **Log Analytics workspace:** `log-cloudops-platform-dev` (East US)
+- **Scope:** Central workspace for platform logs and metrics from Key Vault, App Services, VNets/NSGs, and other landing-zone resources.
+- **Status:** Workspace and dev monitoring RG are provisioned via Terraform (`monitoring/dev/main.tf`). Key Vault diagnostic settings are configured to send audit logs and metrics to this workspace.
+
+Over time this workspace will host:
+- Baseline alerts for availability, performance, and security across the landing zone.
+- Saved KQL queries and workbooks (see `monitoring/dev/queries` and `monitoring/dev/workbooks.md`) for day-to-day CloudOps troubleshooting and dashboards.
+
 ## Repo layout
 
 - `infra/terraform/network` - hub-and-spoke Terraform
