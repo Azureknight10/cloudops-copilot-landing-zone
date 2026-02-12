@@ -1,0 +1,13 @@
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\DevSpokeApp.exe
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\DevSpokeApp.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Azure.Core.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Azure.Identity.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Azure.Security.KeyVault.Secrets.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\dev\Cloud Infrastructure\src\DevSpokeApp\bin\Debug\net8.0\System.ClientModel.dll

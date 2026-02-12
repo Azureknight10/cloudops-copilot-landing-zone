@@ -1,0 +1,28 @@
+<mxfile host="65bd71144e">
+    <diagram id="uagOrc4dsHGIDJ8cwil3" name="Page-1">
+        <mxGraphModel dx="538" dy="239" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="+-------------------------------------------------------------+&#xa;|                    Platform Subscription                    |&#xa;+-------------------------------------------------------------+&#xa;&#xa;&#xa;  Hub Resource Group (rg-cloudops-hubspoke)&#xa;  -----------------------------------------------------------&#xa;  [ Hub VNet ]----peering----[ Spoke VNet(s) ]&#xa;       |                           |&#xa;    [ NSGs ]                    [ NSGs ]&#xa;       |&#xa;   +-----------------+&#xa;   | Key Vault       |  (cloudops-hubspoke-kv)&#xa;   | + UAMI / MI     |&#xa;   +-----------------+&#xa;           |&#xa;           v  (secrets, keys, audit events)&#xa;&#xa;&#xa;  Spoke App Resource Group(s)&#xa;  -----------------------------------------------------------&#xa;  [ App Service / Functions / VM ]&#xa;  [ Storage / DB ]&#xa;           |&#xa;           v  (app logs, metrics)&#xa;&#xa;&#xa;&#xa;&#xa;  Monitoring Resource Group (rg-cloudops-monitoring-dev)&#xa;  -----------------------------------------------------------&#xa;  +---------------------------------------------+&#xa;  | Log Analytics Workspace                     |&#xa;  |  log-cloudops-platform-dev (East US)        |&#xa;  +---------------------------------------------+&#xa;&#xa;&#xa;  Telemetry flows&#xa;  ---------------&#xa;  Key Vault  -------------------------------&gt;  Log Analytics&#xa;  App Service / Functions / VM ------------&gt;  Log Analytics&#xa;  VNets / NSGs / Firewall (later) ---------&gt;  Log Analytics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F4F8;strokeColor=#1F2937;fontStyle=1;fontSize=14;strokeWidth=2;fontColor=#111827" vertex="1" parent="1">
+                    <mxGeometry x="110" y="70" width="560" height="720" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Logs + metrics" style="endArrow=block;html=1;strokeColor=#16A34A;strokeWidth=2;fontColor=#065F46" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="NSG flow logs (later)" style="endArrow=block;html=1;strokeColor=#16A34A;strokeWidth=2;fontColor=#065F46" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="shape=image;image=https://raw.githubusercontent.com/Azure/azure-icons/main/svg/KeyVault.svg;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=0;aspect=fixed;labelPosition=center;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="145" y="140" width="32" height="32" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="shape=image;image=https://raw.githubusercontent.com/Azure/azure-icons/main/svg/VirtualNetwork.svg;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=0;aspect=fixed;labelPosition=center;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="370" y="140" width="32" height="32" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="shape=image;image=https://raw.githubusercontent.com/Azure/azure-icons/main/svg/LogAnalytics.svg;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=0;aspect=fixed;labelPosition=center;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="510" width="32" height="32" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

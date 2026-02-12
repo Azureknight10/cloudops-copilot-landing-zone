@@ -33,8 +33,58 @@
       background: radial-gradient(1200px 600px at 80% -10%, rgba(56, 189, 248, 0.18), transparent 60%),
         radial-gradient(900px 500px at -10% 20%, rgba(45, 212, 191, 0.16), transparent 60%),
         linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 100%);
-      padding: 48px 24px 64px;
+      padding: 24px 24px 64px;
       overflow-x: hidden;
+    }
+
+    /* Top navigation */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.88));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      margin: -24px -24px 16px;
+    }
+
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent) 0, var(--accent-2) 70%);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+    }
+
+    .nav-links a {
+      margin-left: 16px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
     }
 
     .wrap {
@@ -192,19 +242,75 @@
 
     .dashboard-card h3 {
       font-size: 1.05rem;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
 
-    .dashboard-card ul {
+    .card-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .card-list {
       list-style: none;
-      padding-left: 0;
-      margin: 0;
-      font-size: 0.9rem;
+      padding: 0;
+      margin: 8px 0 0;
+      font-size: 0.88rem;
+    }
+
+    .card-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .card-list span {
       color: var(--muted);
     }
 
-    .dashboard-card li {
-      margin-bottom: 6px;
+    .card-list strong {
+      font-weight: 500;
+    }
+
+    /* Activity section */
+    .activity {
+      margin-top: 40px;
+    }
+
+    .activity h2 {
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .activity-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .activity-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .activity-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-top: 6px;
+      background: var(--accent-2);
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+    }
+
+    .activity-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
     }
 
     @keyframes floatIn {
@@ -226,21 +332,35 @@
   </style>
 </head>
 <body>
+  <header class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="nav-dot"></span>
+        <span>CloudOps Copilot • dev</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Dashboard</a>
+        <a href="tracker.html">Tracker</a>
+        <a href="#activity">Activity</a>
+      </nav>
+    </div>
+  </header>
+
   <div class="wrap">
     <!-- Hero + sidebar card -->
     <div class="grid">
       <section>
         <span class="tag">CloudOps Workspace</span>
-        <h1>Cloud Infrastructure Projects</h1>
+        <h1>CloudOps Copilot Landing Zone</h1>
         <p class="subtitle">
-          A curated hub for CloudOps initiatives, status tracking, and deployment
-          milestones. Jump into the tracker to monitor progress in real time.
+          Opinionated Azure landing zone for app teams, with network, security, and app wiring defined as code.
+          Used as a demo platform for Cloud/DevOps and Copilot engineering work.
         </p>
         <div class="actions">
-          <a class="btn primary" href="tracker.html">Open Progress Tracker</a>
-          <a class="btn ghost" href="data/cloudops_landing_zone_tracker.json">View Roadmap Data</a>
+          <a class="btn primary" href="tracker.html">View implementation roadmap</a>
+          <a class="btn ghost" href="data/cloudops_landing_zone_tracker.json">Download tracker JSON</a>
         </div>
-        <p class="meta">Last updated: February 12, 2026</p>
+        <p class="meta">Environment: dev • Subscription: lab • Last updated: February 12, 2026</p>
       </section>
 
       <aside class="card">
@@ -255,37 +375,74 @@
       </aside>
     </div>
 
-    <!-- New dashboard cards -->
+    <!-- Dashboard cards -->
     <section class="dashboard-grid">
       <article class="dashboard-card">
+        <p class="card-kicker">Landing zone (dev)</p>
         <h3>Platform status</h3>
-        <ul>
-          <li><strong>Resource group:</strong> rg-cloudops-hubspoke</li>
-          <li><strong>Hub VNet:</strong> vnet-hub-dev</li>
-          <li><strong>Spoke VNet:</strong> vnet-spoke-app-dev</li>
-          <li><strong>State:</strong> Deployed via Terraform</li>
+        <ul class="card-list">
+          <li><span>Resource group</span><strong>rg-cloudops-hubspoke</strong></li>
+          <li><span>Hub VNet</span><strong>vnet-hub-dev</strong></li>
+          <li><span>Spoke VNet</span><strong>vnet-spoke-app-dev</strong></li>
+          <li><span>Tags</span><strong>env=dev • owner=shane</strong></li>
         </ul>
       </article>
 
       <article class="dashboard-card">
-        <h3>Security & secrets</h3>
-        <ul>
-          <li><strong>Key Vault:</strong> cloudops-hubspoke-kv</li>
-          <li><strong>Identity:</strong> cloudops-hubspoke-uami-app</li>
-          <li><strong>Secrets:</strong> TestSecret (config POC)</li>
-          <li><strong>Pattern:</strong> UAMI + Key Vault (least privilege)</li>
+        <p class="card-kicker">Security baseline</p>
+        <h3>Security &amp; secrets</h3>
+        <ul class="card-list">
+          <li><span>Key Vault</span><strong>cloudops-hubspoke-kv</strong></li>
+          <li><span>Managed identity</span><strong>cloudops-hubspoke-uami-app</strong></li>
+          <li><span>Secret scope</span><strong>secrets: get, list</strong></li>
+          <li><span>Sample secret</span><strong>TestSecret → app config</strong></li>
         </ul>
       </article>
 
       <article class="dashboard-card">
-        <h3>Apps & endpoints</h3>
-        <ul>
-          <li><strong>Local API:</strong> DevSpokeApp (`/`, `/secret`)</li>
-          <li><strong>Cloud API (target):</strong> dev-spoke-app-clean</li>
-          <li><strong>UI:</strong> Dashboard & tracker.html</li>
-          <li><strong>Next:</strong> Static Web App + API</li>
+        <p class="card-kicker">Workload apps</p>
+        <h3>Apps &amp; endpoints</h3>
+        <ul class="card-list">
+          <li><span>Local API</span><strong>DevSpokeApp (`/`, `/secret`)</strong></li>
+          <li><span>Cloud API target</span><strong>dev-spoke-app-clean</strong></li>
+          <li><span>UI</span><strong>Dashboard, tracker.html</strong></li>
+          <li><span>Next</span><strong>Static Web App + Functions API</strong></li>
         </ul>
       </article>
+    </section>
+
+    <!-- Recent activity -->
+    <section id="activity" class="activity">
+      <h2>Recent activity</h2>
+      <ul class="activity-list">
+        <li>
+          <span class="activity-dot"></span>
+          <div>
+            <p><strong>Wired DevSpokeApp to ASP.NET config pipeline</strong></p>
+            <p class="activity-meta">
+              /secret endpoint returns "Hello from appsettings"; app prepared to source TestSecret from Key Vault in Azure.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="activity-dot"></span>
+          <div>
+            <p><strong>Provisioned UAMI + Key Vault via Terraform</strong></p>
+            <p class="activity-meta">
+              cloudops-hubspoke-kv and cloudops-hubspoke-uami-app deployed in rg-cloudops-hubspoke with least-privilege access.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="activity-dot"></span>
+          <div>
+            <p><strong>Added CloudOps dashboard and tracker wiring</strong></p>
+            <p class="activity-meta">
+              index.html and tracker.html linked as the primary UI for monitoring landing zone build-out.
+            </p>
+          </div>
+        </li>
+      </ul>
     </section>
   </div>
 </body>
