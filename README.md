@@ -1,3 +1,8 @@
+## Dev monitoring status
+
+- `dev-spoke-app` is deployed and reachable at its App Service URL, and is configured to send HTTP logs, console/app logs, and metrics to the `log-cloudops-platform-dev` Log Analytics workspace via a Terraform-managed diagnostic setting.
+- `nsg-spoke-app` is configured with a diagnostic setting that sends NSG diagnostic logs to `log-cloudops-platform-dev` for centralized network visibility.
+- The `dev-spoke-app` site is currently running and **waiting for content**; application code and routes will be added in subsequent iterations.
 # CloudOps Copilot Landing Zone
 
 Reference implementation of a hub-and-spoke Azure landing zone with Terraform plus a minimal .NET 8 app to validate Key Vault + managed identity. Includes a static progress tracker UI backed by JSON.
