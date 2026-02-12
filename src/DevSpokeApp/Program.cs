@@ -4,6 +4,10 @@ using Azure.Security.KeyVault.Secrets;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Debug: see what config/env contains
+Console.WriteLine($"KEY_VAULT_NAME from config: {builder.Configuration["KEY_VAULT_NAME"]}");
+Console.WriteLine($"AZURE_CLIENT_ID from env: {Environment.GetEnvironmentVariable("AZURE_CLIENT_ID")}");
+
 // Key Vault integration
 var keyVaultName = builder.Configuration["KEY_VAULT_NAME"];
 if (!string.IsNullOrEmpty(keyVaultName))

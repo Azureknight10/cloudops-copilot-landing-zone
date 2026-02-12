@@ -82,9 +82,17 @@ Reference diagrams:
 
 ![UAMI to Key Vault secrets flow](docs/cloudops-hubspoke-uami-keyvault.png)
 
-## DevSpokeApp
+## DevSpokeApp – local config + Key Vault wiring
 
-Minimal .NET 8 web app used for testing configuration and Azure Key Vault integration.
+Minimal .NET 8 Web API used to test Key Vault + managed identity pattern.
+
+- `/` returns a health string: `DevSpokeApp running`
+- `/secret` reads `TestSecret` from ASP.NET Core configuration
+
+Locally, `TestSecret` comes from `appsettings.json`.
+
+The app is wired to use Azure Key Vault via `AddAzureKeyVault` and `DefaultAzureCredential`.
+In Azure, the Web App will resolve `TestSecret` from `cloudops-hubspoke-kv` using a user-assigned managed identity (`AZURE_CLIENT_ID`).
 
 ### Local development
 
