@@ -1,16 +1,10 @@
 # CloudOps Copilot Landing Zone Tracker
 
-Static progress tracker and reference implementation for a hub-and-spoke Azure landing zone. The tracker reads roadmap items from JSON and stores progress in browser `localStorage`.
-
-## Contents
-
-- Home page with a link to the tracker
-- Tracker UI and logic
-- JSON data source
+Static progress tracker and reference implementation for a hub-and-spoke Azure landing zone. Roadmap items come from JSON and progress is stored in browser `localStorage`.
 
 ## Run locally
 
-Because the tracker loads JSON, serve it from a local web server.
+Serve from a local web server.
 
 Option 1: VS Code Live Server
 1. Open the workspace in VS Code
@@ -26,15 +20,7 @@ Then open:
 http://localhost:5500/index.html
 ```
 
-## Data file
-
-The tracker reads its roadmap from:
-
-- `data/cloudops_landing_zone_tracker.json`
-
-## Notes
-
-Progress is saved to browser `localStorage`. Clearing site data resets progress.
+Roadmap data: `data/cloudops_landing_zone_tracker.json`
 
 ## Milestone 1 - Hub-and-Spoke Network (Completed)
 
@@ -61,17 +47,17 @@ Security baseline for application secrets using Azure Key Vault and a user-assig
 
 ### What this does
 
-- Centralizes application secrets in a locked-down Key Vault (`cloudops-hubspoke-kv`)
-- Uses UAMI (`cloudops-hubspoke-uami-app`) so apps authenticate without stored credentials
-- Enforces least privilege with Get/List only on secrets
-- Protects the vault with soft delete, purge protection, and restricted network access
+- Centralizes secrets in `cloudops-hubspoke-kv`
+- Uses UAMI `cloudops-hubspoke-uami-app` for passwordless auth
+- Enforces least privilege (Get/List only)
+- Keeps vault protections on (soft delete, purge protection, restricted access)
 
 ### How it works (high level)
 
-- Spoke apps (App Service, Function, VM) use UAMI `cloudops-hubspoke-uami-app`
-- The app requests a token from Azure Entra ID scoped for Key Vault
-- The app calls `cloudops-hubspoke-kv` and can read only permitted secrets
-- Management group/policy baselines can enforce vault protections across the landing zone
+- Spoke apps use UAMI `cloudops-hubspoke-uami-app`
+- App requests a token from Azure Entra ID for Key Vault
+- App calls `cloudops-hubspoke-kv` and reads permitted secrets
+- Policy baselines can enforce vault protections
 
 Reference diagrams:
 
@@ -84,15 +70,12 @@ Reference diagrams:
 
 ## DevSpokeApp – local config + Key Vault wiring
 
-Minimal .NET 8 Web API used to test Key Vault + managed identity pattern.
+Minimal .NET 8 Web API to test Key Vault + managed identity.
 
-- `/` returns a health string: `DevSpokeApp running`
+- `/` returns `DevSpokeApp running`
 - `/secret` reads `TestSecret` from ASP.NET Core configuration
 
-Locally, `TestSecret` comes from `appsettings.json`.
-
-The app is wired to use Azure Key Vault via `AddAzureKeyVault` and `DefaultAzureCredential`.
-In Azure, the Web App will resolve `TestSecret` from `cloudops-hubspoke-kv` using a user-assigned managed identity (`AZURE_CLIENT_ID`).
+Locally, `TestSecret` comes from `appsettings.json`. In Azure, the Web App resolves it from `cloudops-hubspoke-kv` via `AddAzureKeyVault` + `DefaultAzureCredential` using a user-assigned managed identity (`AZURE_CLIENT_ID`).
 
 ### Local development
 
@@ -102,11 +85,6 @@ dotnet run
 ```
 
 The app listens on the port from `Properties\launchSettings.json` (currently `http://localhost:5043`).
-
-### Endpoints
-
-- `/` - health check, returns `DevSpokeApp running`
-- `/secret` - returns the value of `TestSecret` from configuration
 
 ### Configure TestSecret locally
 
@@ -125,13 +103,10 @@ Create `appsettings.json` in the project root:
 }
 ```
 
-Then restart the app:
+Restart the app:
 
 ```bash
 dotnet run
 ```
 
-Browse to:
-
-- `http://localhost:5043/` - `DevSpokeApp running`
-- `http://localhost:5043/secret` - `Hello from appsettings`
+Browse to `http://localhost:5043/` or `http://localhost:5043/secret`.
